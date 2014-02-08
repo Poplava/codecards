@@ -6,7 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Poplava/codecards.git"
+  },
   "author": "Igor Poplavsky",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.4.8",
+    "mongoose": "~3.8.6",
+    "bower": "~1.2.8",
+    "underscore": "~1.5.2"
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "d8950f57e496a49ec8bd6621d583e0424cd07890",
+  "devDependencies": {},
+  "keywords": [
+    "codecards"
+  ]
 }
