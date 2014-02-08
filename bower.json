@@ -1,0 +1,25 @@
+{
+  "name": "codecards",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Poplava/codecards",
+  "authors": [
+    "Igor Poplavsky <igor.poplava@gmail.com>"
+  ],
+  "description": "codecards",
+  "keywords": [
+    "codecards"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.12",
+    "bootstrap": "~3.1.0"
+  }
+}
