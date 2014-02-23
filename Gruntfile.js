@@ -1,38 +1,59 @@
 module.exports = function(grunt) {
     'use strict';
 
-    var path = require('path');
-
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        watch: {
+            app: {
+                files: ['app/**/*.{js,css}'],
+                tasks: ['build']
+            },
+            server: {
+                files: ['server.js', 'server/**/*.*'],
+                tasks: ['build', 'express:dev'],
+                options: {
+                    spawn: true
+                }
+            }
+        },
         copy: {
-            views: {
+            app: {
+                files: [{
+                    expand: true,
+                    cwd: 'app',
+                    src: ['**/*.{js,css}'],
+                    dest: 'dist/public/app'
+                }]
+            },
+            server: {
                 files: {
-                    'server/views/index.dev.jade': 'server/views/index.sample.jade',
-                    'server/views/index.jade': 'server/views/index.sample.jade'
+                    'server/views/index.dev.jade': 'server/views/index.sample.jade'
                 }
             }
         },
         bowerInstall: {
             server: {
+                ignorePath: 'dist',
                 src: ['server/views/index.dev.jade']
             }
         },
         express: {
             dev: {
                 options: {
+                    script: 'server.js',
                     port: 8080,
-                    bases: [path.resolve(__dirname, 'public')],
+                    delay: 1000
                 }
             }
         }
     });
 
-    console.log(path.resolve(__dirname, 'public'));
     grunt.loadNpmTasks('grunt-bower-install');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-express');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-express-server');
 
-    grunt.registerTask('serve', ['express:dev', 'express-keepalive']);
-    grunt.registerTask('default', ['copy:views', 'bowerInstall']);
+    grunt.registerTask('build', ['newer:copy', 'bowerInstall']);
+    grunt.registerTask('serve', ['build', 'express:dev', 'watch']);
 };
