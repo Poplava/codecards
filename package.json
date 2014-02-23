@@ -16,11 +16,17 @@
     "express": "~3.4.8",
     "mongoose": "~3.8.6",
     "bower": "~1.2.8",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "jade": "~1.1.5"
   },
   "readmeFilename": "README.md",
   "gitHead": "d8950f57e496a49ec8bd6621d583e0424cd07890",
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-bower-install": "~1.0.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-express": "~1.2.1"
+  },
   "keywords": [
     "codecards"
   ]
