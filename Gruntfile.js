@@ -12,7 +12,7 @@ module.exports = function(grunt) {
                 files: ['server.js', 'server/**/*.*'],
                 tasks: ['build', 'express:dev'],
                 options: {
-                    spawn: true
+                    spawn: false
                 }
             }
         },
@@ -41,8 +41,7 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     script: 'server.js',
-                    port: 8080,
-                    delay: 1000
+                    port: 8080
                 }
             }
         }

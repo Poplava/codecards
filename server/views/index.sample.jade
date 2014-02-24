@@ -9,19 +9,21 @@ html(ng-app='codecards')
     //endbower
     link(rel='stylesheet', href='/public/app/css/styles.css')
   body
-    .container(ng-controller='AddCardCtrl')
+    .container(ng-controller='AddCardCtrl', ng-cloak)
       header
         h3 Codecards
       hr
-      .cards
-        h2(ng-show='!cards.length') No cards. Try to adde one.
-        .card(ng-repeat='card in cards')
-          h3 {{card.title}}
-          p {{card.text}}
-          span.glyphicon.glyphicon-remove(ng-click='remove(card._id)')
-      hr
       .row
-        .col-md-6.col-md-offset-3
+        .col-md-9
+          .cards
+            h2(ng-hide='cards.length') No cards. Try to adde one.
+            h2(ng-show='cards.length') Yours {{cards.length}} cards.
+            .card(ng-repeat='card in cards')
+              h3 {{card.title}}
+              p {{card.text}}
+              span.label.label-info(ng-show='card.date') {{getDate(card.date)}}
+              span.glyphicon.glyphicon-remove(ng-click='remove(card._id)')
+        .col-md-3
           h3 Add card
           .form-group(ng-class='{"has-error": errors.title}')
             label Title{{title ? ':' : ''}}  {{title}}

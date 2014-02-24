@@ -2,18 +2,14 @@ var app = angular.module('codecards', []);
 
 app.factory('Cards', ['$http', function($http) {
     return {
-        post: function(data, success, error) {
+        post: function(data, success) {
             $http.post('/cards', data).success(function() {
                 if (typeof success === 'function') success.apply(this, arguments);
-            }).error(function() {
-                if (typeof error === 'function') error.apply(this, arguments);
             });
         },
-        get: function(data, success, error) {
+        get: function(data, success) {
             $http.get('/cards', data).success(function() {
                 if (typeof success === 'function') success.apply(this, arguments);
-            }).error(function() {
-                if (typeof error === 'function') error.apply(this, arguments);
             });
         },
         remove: function(id, success) {
@@ -38,8 +34,9 @@ app.controller('AddCardCtrl', ['$scope', 'Cards', function($scope, Cards) {
                 title: $scope.title,
                 text: $scope.text
             }, function(data) {
-                $scope.cards.unshift(data);
+                $scope.cards.push(data);
             });
+
             $scope.title = $scope.text = '';
         }
     };
@@ -58,5 +55,10 @@ app.controller('AddCardCtrl', ['$scope', 'Cards', function($scope, Cards) {
         if (!$scope.text) $scope.errors.text = true;
         if ($scope.errors.title || $scope.errors.text) return false;
         return true;
+    };
+
+    $scope.getDate = function(dateStr) {
+        var date = new Date(dateStr);
+        return date.toLocaleString();
     };
 }]);

@@ -3,19 +3,28 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
 var Cards = mongoose.model('Cards', {
-    title: String,
-    text: String
+    title: {
+        type: String,
+        required: true
+    },
+    text: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = {
-    post: function(data) {
-        var card = new Cards(data);
+    post: function(req, res) {
+        var card = new Cards(req.body);
 
-        card.save(function(err) {
+        card.save(function(err, data) {
             if (err) console.log(err);
+            res.json(data);
         });
-
-        return card;
     },
     get: function(req, res) {
         var cards = [];
@@ -25,7 +34,7 @@ module.exports = {
         });
     },
     delete: function(req, res) {
-        Cards.findById(req.query.id).remove().exec(function() {
+        Cards.findByIdAndRemove(req.query.id, function() {
             res.json();
         });
     }

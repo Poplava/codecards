@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+}
+
 body {
   background: #fafafa;
   padding: 20px 0;
@@ -9,7 +13,7 @@ body {
 
 .card {
     display: inline-block;
-    padding: 10px;
+    padding: 0 20px 10px;
     background: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     max-width: 200px;

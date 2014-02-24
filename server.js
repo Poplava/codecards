@@ -1,6 +1,5 @@
 var express = require('express'),
-    app = express(),
-    Cards = require('./server/models/Cards');
+    app = express();
 
 app.use(express.logger());
 app.use(express.compress());
@@ -13,14 +12,7 @@ app.set('port', process.env.PORT || 8000);
 
 app.use(express.static('./dist'));
 
-app.post('/cards', function(req, res) {
-    var result = Cards.post(req.body);
-    res.json(result);
-});
-
-app.get('/cards', Cards.get);
-
-app.delete('/cards', Cards.delete);
+require('./server/routes/Routes')(app);
 
 app.get('/index', function(req, res) {
     res.render('index.dev.jade', { title: 'title' });
